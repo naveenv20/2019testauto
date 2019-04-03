@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="3" passed="1" failed="0" skipped="2">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2019-04-03T02:15:54Z" name="Default suite" finished-at="2019-04-03T02:15:55Z" duration-ms="1224">
+  <suite started-at="2019-04-03T02:29:46Z" name="Default suite" finished-at="2019-04-03T02:29:46Z" duration-ms="596">
     <groups>
     </groups>
-    <test started-at="2019-04-03T02:15:54Z" name="Default test" finished-at="2019-04-03T02:15:55Z" duration-ms="1224">
+    <test started-at="2019-04-03T02:29:46Z" name="Default test" finished-at="2019-04-03T02:29:46Z" duration-ms="596">
       <class name="com.qtpselenium.hybrid.suitea.LoginTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:15:54Z" name="init" finished-at="2019-04-02T23:15:55Z" duration-ms="1166" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:29:46Z" name="init" finished-at="2019-04-02T23:29:46Z" duration-ms="548" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:15:55Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:15:55Z" duration-ms="18" status="PASS">
+        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:29:46Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:29:46Z" duration-ms="14" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -22,7 +22,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:15:55Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:15:55Z" duration-ms="2" status="SKIP">
+        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:29:46Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:29:46Z" duration-ms="1" status="SKIP">
           <params>
             <param index="0">
               <value>
@@ -68,7 +68,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:15:55Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:15:55Z" duration-ms="1" status="SKIP">
+        <test-method signature="loginTest(java.util.Hashtable)[pri:0, instance:com.qtpselenium.hybrid.suitea.LoginTest@b2c9a9c]" started-at="2019-04-02T23:29:46Z" name="loginTest" data-provider="getData" finished-at="2019-04-02T23:29:46Z" duration-ms="1" status="SKIP">
           <params>
             <param index="0">
               <value>
