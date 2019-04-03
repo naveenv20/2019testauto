@@ -12,10 +12,17 @@ public class BaseTest {
 	public Properties envProp;
 	public Properties prop;// environment. properties file  
 	public Xls_Reader xls;
+	public String testName;
 	
 
 	@BeforeTest
 	public void init(){
+		System.out.println("******"+ this.getClass().getSimpleName());
+		testName=this.getClass().getSimpleName();
+		
+		//System.out.println("******"+this.getClass().getPackage().getName());
+		String arr[]=this.getClass().getPackage().getName().split("\\.");
+		String suiteName=(arr[arr.length-1]);
 		prop= new Properties();
 		envProp=new Properties();
 		System.out.println("Initialization in init method before test method of base test");
@@ -37,7 +44,7 @@ public class BaseTest {
 		
 		
 		//initialise the xls file
-		xls= new Xls_Reader(envProp.getProperty("suitea_xls"));
+		xls= new Xls_Reader(envProp.getProperty( suiteName+"_xls"));
 		
 	}
 	
