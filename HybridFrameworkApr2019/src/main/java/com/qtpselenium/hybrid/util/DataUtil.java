@@ -1,5 +1,7 @@
 package com.qtpselenium.hybrid.util;
 
+import java.util.Hashtable;
+
 public class DataUtil {
 	
 	public static Object[][] getTestData(String testName, Xls_Reader xls){

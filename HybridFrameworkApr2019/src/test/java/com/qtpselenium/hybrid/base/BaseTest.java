@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.testng.annotations.BeforeTest;
 
+import com.qtpselenium.hybrid.driver.DriverScript;
 import com.qtpselenium.hybrid.util.Xls_Reader;
 
 public class BaseTest {
@@ -13,6 +14,7 @@ public class BaseTest {
 	public Properties prop;// environment. properties file  
 	public Xls_Reader xls;
 	public String testName;
+	public DriverScript ds;
 	
 
 	@BeforeTest
@@ -44,7 +46,7 @@ public class BaseTest {
 		
 		
 		//initialise the xls file
-		xls= new Xls_Reader(envProp.getProperty( suiteName+"_xls"));
+		xls= new Xls_Reader(System.getProperty("user.dir")+"//src//test//resources//Sheets//"+ envProp.getProperty(suiteName+"_xls"));
 		
 	}
 	
