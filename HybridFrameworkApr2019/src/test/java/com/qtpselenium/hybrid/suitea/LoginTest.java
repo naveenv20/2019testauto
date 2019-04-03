@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest{
 		//before test starts
 		
 	System.out.println("Running Login test");	
-	ds=new DriverScript();
+	
 	ds.executeKeywords(testName, xls, data);
 		
 		
