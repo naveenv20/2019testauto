@@ -1,5 +1,6 @@
 package com.qtpselenium.hybrid.driver;
 
+import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -40,6 +41,17 @@ app.setDatakey(datakey);
 app.setObjectkey(objectkey);
 
 
+//Use Reflections api method to invoke the methods
+Method method;
+try{
+	method=app.getClass().getMethod(keyword);
+	method.invoke(app);
+}catch (Exception e){
+	e.printStackTrace();
+}
+
+
+/*
 if(keyword.equals("openBrowser")) {
 	app.openBrowser();
 }
@@ -55,7 +67,7 @@ else if(keyword.equals("input")) {
 else if(keyword.equals("click")) {
 	app.click();
 }
-
+*/
 }
 }
 }
