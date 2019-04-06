@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.qtpselenium.hybrid.base.BaseTest;
 import com.qtpselenium.hybrid.driver.DriverScript;
+import com.qtpselenium.hybrid.util.Constants;
 import com.qtpselenium.hybrid.util.DataUtil;
 
 
@@ -18,7 +19,7 @@ public class LoginTest extends BaseTest{
 	public void loginTest(Hashtable<String, String> data ) {
 		
 		
-		if(data.get("Runmode").equals("N"))
+		if(data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO))
 			throw new SkipException("Run mode is No");
 		
 	//make sure that u have my prop and xls file objects

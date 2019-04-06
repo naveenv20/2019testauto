@@ -6,8 +6,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GenericKeywords {
 	
@@ -24,7 +28,7 @@ public class GenericKeywords {
 		return envProp;
 	}
 
-	public void setEnvProp(Properties envProp) {
+	public void setEnvProp(Properties envProp) {  
 		this.envProp = envProp;
 	}
 
@@ -86,7 +90,7 @@ public class GenericKeywords {
 	
 	public void click() {
 		System.out.println("click"+ prop.getProperty(objectkey));
-		driver.findElement(By.xpath(prop.getProperty(objectkey))).click();
+		getelement(objectkey).click();
 		
 	}
 	
@@ -94,11 +98,37 @@ public class GenericKeywords {
 	public void type() {
 		System.out.println("type on object: "+ prop.getProperty(objectkey)+"   and value is"+data.get(datakey));
 		driver.findElement(By.xpath(prop.getProperty(objectkey))).clear();
-		driver.findElement(By.xpath(prop.getProperty(objectkey))).sendKeys(data.get(datakey));
-	}
+		getelement(objectkey).sendKeys(data.get(datakey));
+	}	
 	
 	public void navigate() {
 		System.out.println("navigate"+ envProp.getProperty(objectkey));
 		driver.get(envProp.getProperty(objectkey));
+	}
+	
+	//centralised function to extract the web element
+	
+	public WebElement getelement(String objectkey) {
+		WebElement e=null;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			if(objectkey.endsWith("_xpath"))
+			e=driver.findElement(By.xpath(prop.getProperty(objectkey)));
+			else if(objectkey.endsWith("_id"))
+				e=driver.findElement(By.id(prop.getProperty(objectkey)));
+			else if(objectkey.endsWith("_css"))
+				e=driver.findElement(By.cssSelector(prop.getProperty(objectkey)));	
+			else if(objectkey.endsWith("_name"))
+				e=driver.findElement(By.name(prop.getProperty(objectkey)));	
+			//visibility object 
+				
+		wait.until(ExpectedConditions.visibilityOf(e));
+		//state of object 
+		wait.until(ExpectedConditions.elementToBeClickable(e));
+		}
+		catch (Exception exe) {
+			//failure
+		}
+				return e;
 	}
 }
