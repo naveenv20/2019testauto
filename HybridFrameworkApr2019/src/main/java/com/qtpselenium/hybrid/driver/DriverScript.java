@@ -102,4 +102,10 @@ public void setProp(Properties prop) {
 }
 	
 
+public void quit(){
+	if(app!=null){
+		app.quit();
+	}
+}
+
 }

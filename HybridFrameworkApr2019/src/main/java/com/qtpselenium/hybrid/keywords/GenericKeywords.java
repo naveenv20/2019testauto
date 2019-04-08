@@ -1,6 +1,7 @@
 package com.qtpselenium.hybrid.keywords;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -65,6 +66,7 @@ public class GenericKeywords {
 	}
 
 	
+	
 	/*************************Operation Functions*********************/
 	public void openBrowser() {
 		String browser=data.get(datakey);
@@ -106,6 +108,11 @@ public class GenericKeywords {
 		driver.get(envProp.getProperty(objectkey));
 	}
 	
+	public void quit(){
+	if(driver!=null)
+		driver.quit();
+	}
+	
 	//centralised function to extract the web element
 	
 	public WebElement getelement(String objectkey) {
@@ -128,7 +135,35 @@ public class GenericKeywords {
 		}
 		catch (Exception exe) {
 			//failure
+			reportFailure("Object Not found : "+ objectkey);
 		}
 				return e;
+	}
+	
+	
+	public boolean isElementPresent(String objectkey ){
+		List<WebElement> abc=null;
+		if(objectkey.endsWith("_xpath"))
+			abc=driver.findElements(By.xpath(prop.getProperty(objectkey)));
+			else if(objectkey.endsWith("_id"))
+				abc=driver.findElements(By.id(prop.getProperty(objectkey)));
+			else if(objectkey.endsWith("_css"))
+				abc=driver.findElements(By.cssSelector(prop.getProperty(objectkey)));	
+			else if(objectkey.endsWith("_name"))
+				abc=driver.findElements(By.name(prop.getProperty(objectkey)));
+		if(abc.size()>0){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
+	
+	/************reporting function *****************/
+	public void reportFailure(String failuremessage){
+		//fail the test case
+		
+		//take screenshot and embed it in the reports
 	}
 }

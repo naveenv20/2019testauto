@@ -3,6 +3,7 @@ package com.qtpselenium.hybrid.base;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 
 import com.qtpselenium.hybrid.driver.DriverScript;
@@ -54,6 +55,12 @@ public class BaseTest {
 		ds.setProp(prop);
 	}
 	
+	@AfterMethod
+	public void quit(){
+		//quit the driver
+		if(ds!=null)
+		ds.quit();
+	}
 	
 	
 }
