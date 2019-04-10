@@ -5,8 +5,10 @@ import java.util.Properties;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 
 import com.qtpselenium.hybrid.driver.DriverScript;
+import com.qtpselenium.hybrid.util.DataUtil;
 import com.qtpselenium.hybrid.util.Xls_Reader;
 
 public class BaseTest {
@@ -62,5 +64,11 @@ public class BaseTest {
 		ds.quit();
 	}
 	
+	
+	@DataProvider
+	public Object[][] getData(){
+		System.out.println("Inside data provider");
+		return DataUtil.getTestData(testName, xls);
+	}
 	
 }

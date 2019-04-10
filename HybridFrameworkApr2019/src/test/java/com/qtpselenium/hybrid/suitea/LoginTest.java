@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest{
 	public void loginTest(Hashtable<String, String> data ) {
 		
 		
-		if(data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO))
+		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO))
 			throw new SkipException("Run mode is No");
 		
 	//make sure that u have my prop and xls file objects
@@ -33,10 +33,6 @@ public class LoginTest extends BaseTest{
 	}
 	
 	
-	@DataProvider
-	public Object[][] getData(){
-		System.out.println("Inside data provider");
-		return DataUtil.getTestData(testName, xls);
-	}
+	
 
 }

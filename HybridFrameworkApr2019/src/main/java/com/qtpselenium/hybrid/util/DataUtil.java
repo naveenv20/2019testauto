@@ -52,5 +52,25 @@ public class DataUtil {
 			return myData;
 		
 	}
+	
+	
+	
+	//function to check the run mode 
+	//true run mode is false else true
+	public static boolean isSkip(String testcasename, Xls_Reader xls) {
+		int rows=xls.getRowCount(Constants.TESTCASES_SHEET);
+		for(int rNum=2;rNum<=rows;rNum++) {
+			String tcid=xls.getCellData(Constants.TESTCASES_SHEET,Constants.TCID_COL,rNum);
+			if(tcid.equals(testcasename)) {//test is found
+				String runmode=xls.getCellData(Constants.TESTCASES_SHEET,Constants.RUNMODE_COL,rNum);
+				if(runmode.equalsIgnoreCase(Constants.RUNMODE_NO)) {
+					return true;
+				}
+				else
+					return false;
+			}
+		}
+		return true;
+	}
 
 }
