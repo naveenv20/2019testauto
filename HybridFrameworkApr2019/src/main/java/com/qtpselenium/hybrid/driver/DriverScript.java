@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Properties;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.qtpselenium.hybrid.keywords.AppKeywords;
 import com.qtpselenium.hybrid.util.Constants;
 import com.qtpselenium.hybrid.util.Xls_Reader;
@@ -14,6 +16,21 @@ public class DriverScript {
 	public Properties envProp;
 	public Properties prop;
 	AppKeywords app;
+	public ExtentTest test;
+
+
+
+public ExtentTest getTest() {
+		return test;
+	}
+
+
+
+
+	public void setTest(ExtentTest test) {
+		this.test = test;
+	}
+
 
 
 
@@ -27,6 +44,8 @@ app.setEnvProp(envProp);
 app.setProp(prop);
 //send the hashtable data aswell to keywords class
 app.setData(data);
+//send the extent test object to keywords class, for logging there
+app.setTest(test);
 for(int rNum=2;rNum<=rows;rNum++) {
 String tcid=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.TCID_COL, rNum);
 if(tcid.equals(testName)) {
@@ -35,6 +54,8 @@ String objectkey=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.OBJECT_COL ,
 String datakey=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.DATA_COL, rNum);
 String datavalue=data.get(datakey);
 //System.out.println(tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
+/******* if we need log into extent reports then use the test object***************/
+//test.log(Status.INFO, tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
 //System.out.println("Object key has the value as : "+prop.getProperty(objectkey));
 
 

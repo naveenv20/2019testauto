@@ -20,14 +20,14 @@ public class TestB extends BaseTest{
 	
 	public void testb(Hashtable<String, String> data){
 		
-		ExtentReports rep=ExtentManager.getInstance(prop.getProperty("reportPath"));
-		ExtentTest test=rep.createTest(testName);
+		
 		test.log(Status.INFO, "starting");
-		rep.flush();
 		
-		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO))
+		
+		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO)){
+			test.log(Status.SKIP, "Test Case configured as No: "+ testName);
 			throw new SkipException("Run mode is No");
-		
+		}
 		
 		System.out.println("Running test B");	
 		

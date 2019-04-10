@@ -4,10 +4,14 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.qtpselenium.hybrid.driver.DriverScript;
+import com.qtpselenium.hybrid.reports.ExtentManager;
 import com.qtpselenium.hybrid.util.DataUtil;
 import com.qtpselenium.hybrid.util.Xls_Reader;
 
@@ -18,8 +22,13 @@ public class BaseTest {
 	public Xls_Reader xls;
 	public String testName;
 	public DriverScript ds;
+	public ExtentReports rep;
+	public ExtentTest test;
 	
 
+	
+	
+	
 	@BeforeTest
 	public void init(){
 		System.out.println("******"+ this.getClass().getSimpleName());
@@ -53,8 +62,10 @@ public class BaseTest {
 		
 		//initialise the driver script object
 		ds=new DriverScript();
+		//passing the envprop and prop object to driverscript object through getter and setter
 		ds.setEnvProp(envProp);
 		ds.setProp(prop);
+		
 	}
 	
 	@AfterMethod
@@ -62,8 +73,19 @@ public class BaseTest {
 		//quit the driver
 		if(ds!=null)
 		ds.quit();
+		if(rep!=null){
+			rep.flush();
+		}
 	}
 	
+	
+	@BeforeMethod
+	public void initTest(){
+		rep=ExtentManager.getInstance(prop.getProperty("reportPath"));
+		test=rep.createTest(testName);
+		//passing the extent test object for logging to driverscript obj ,for logging stuff in that 
+				ds.setTest(test);
+	}
 	
 	@DataProvider
 	public Object[][] getData(){
