@@ -18,7 +18,7 @@ public class TestB extends BaseTest{
 	
 	@Test(dataProvider="getData")
 	
-	public void testb(Hashtable<String, String> data){
+	public void testb(Hashtable<String, String> data) throws Exception{
 		
 		
 		test.log(Status.INFO, "starting");

@@ -13,4 +13,6 @@ public class AppKeywords extends GenericKeywords{
 	public void defaultlogin() {
 		test.log(Status.INFO,"Inside the default login function");	
 	}
+
+	
 }

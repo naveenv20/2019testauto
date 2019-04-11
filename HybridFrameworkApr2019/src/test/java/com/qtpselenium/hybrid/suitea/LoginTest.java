@@ -17,7 +17,7 @@ import com.qtpselenium.hybrid.util.DataUtil;
 public class LoginTest extends BaseTest{
 	
 	@Test(dataProvider="getData")
-	public void loginTest(Hashtable<String, String> data ) {
+	public void loginTest(Hashtable<String, String> data ) throws Exception {
 		test.log(Status.INFO, "starting");
 		
 		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO)){

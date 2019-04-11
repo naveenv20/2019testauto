@@ -34,7 +34,7 @@ public ExtentTest getTest() {
 
 
 
-public void executeKeywords (String testName, Xls_Reader xls, Hashtable<String, String> data) {
+public void executeKeywords (String testName, Xls_Reader xls, Hashtable<String, String> data) throws Exception {
 	int rows=xls.getRowCount(Constants.KEYWORDS_SHEET);
 System.out.println("num of rows "+ rows);
 
@@ -53,6 +53,7 @@ String keyword=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.KEYWORD_COL, 
 String objectkey=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.OBJECT_COL , rNum);
 String datakey=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.DATA_COL, rNum);
 String datavalue=data.get(datakey);
+String ProceedonFail=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.PROCEED_COL,rNum);;
 //System.out.println(tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
 /******* if we need log into extent reports then use the test object***************/
 //test.log(Status.INFO, tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
@@ -61,16 +62,13 @@ String datavalue=data.get(datakey);
 
 app.setDatakey(datakey);
 app.setObjectkey(objectkey);
-
+app.setProceedonFail(ProceedonFail);
 
 //Use Reflections api method to invoke the methods
 Method method;
-try{
+
 	method=app.getClass().getMethod(keyword);
 	method.invoke(app);
-}catch (Exception e){
-	e.printStackTrace();
-}
 
 
 /*
@@ -92,6 +90,7 @@ else if(keyword.equals("click")) {
 */
 }
 }
+app.assertall();
 }
 
 
