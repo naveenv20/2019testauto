@@ -18,10 +18,10 @@ public class ExtentManager {
     		String fileName="Report.html";
     		Date d = new Date();
     		String folderName=d.toString().replace(":", "_").replace(" ", "_");
-    		
-    		// directory of the report folder
-    		new File(System.getProperty("user.dir")+"//"+reportPath+folderName+"//screenshots").mkdirs();
     		reportPath=System.getProperty("user.dir")+"//"+reportPath+"//"+folderName+"//";
+    		// directory of the report folder
+    		new File(reportPath+"screenshots").mkdirs();
+    		//reportPath=System.getProperty("user.dir")+"//"+reportPath+"//"+folderName+"//";
     		screenshotFolderPath=reportPath+"screenshots//";
     		System.out.println(reportPath+fileName);
     		createInstance(reportPath+fileName);
