@@ -25,9 +25,6 @@ public class BaseTest {
 	public ExtentReports rep;
 	public ExtentTest test;
 	
-
-	
-	
 	
 	@BeforeTest
 	public void init(){
@@ -48,7 +45,7 @@ public class BaseTest {
 			
 			FileInputStream fp= new FileInputStream(System.getProperty("user.dir")+"//src//test//resources//"+envvalue+".properties");
 			envProp.load(fp);
-			System.out.println(envProp.getProperty("url"));
+			System.out.println("#####"+envProp.getProperty("gap_url"));
 			
 		} 
 		catch (Exception e) {

@@ -1,23 +1,32 @@
 package com.qtpselenium.hybrid.keywords;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.qtpselenium.hybrid.reports.ExtentManager;
 
 public class GenericKeywords {
 	
@@ -111,7 +120,7 @@ public class GenericKeywords {
 		//System.out.println("click"+ prop.getProperty(objectkey));
 		test.log(Status.INFO,"click "+ prop.getProperty(objectkey));
 		getelement(objectkey).click();
-		
+		test.log(Status.INFO,"after click ");
 	}
 	
 	
@@ -134,12 +143,20 @@ public class GenericKeywords {
 		driver.quit();
 	}
 	
+	public void select(){
+		test.log(Status.INFO, "selecting a value from dropdown");
+		Select element= new Select(getelement(objectkey));
+		String new_xpath=prop.getProperty("ms_select_value1_xpath")+data.get(datakey)+prop.getProperty("ms_select_value2_xpath");
+		test.log(Status.INFO, "selecting xpath value is : "+new_xpath);
+		getelement(new_xpath).click();
+	}
+	
 	//centralised function to extract the web element
 	
 	public WebElement getelement(String objectkey) {
 		WebElement e=null;
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 20);
+			
 			if(objectkey.endsWith("_xpath"))
 			e=driver.findElement(By.xpath(prop.getProperty(objectkey)));
 			else if(objectkey.endsWith("_id"))
@@ -149,7 +166,7 @@ public class GenericKeywords {
 			else if(objectkey.endsWith("_name"))
 				e=driver.findElement(By.name(prop.getProperty(objectkey)));	
 			//visibility object 
-				
+		WebDriverWait wait = new WebDriverWait(driver, 20);		
 		wait.until(ExpectedConditions.visibilityOf(e));
 		//state of object 
 		wait.until(ExpectedConditions.elementToBeClickable(e));
@@ -189,14 +206,35 @@ public class GenericKeywords {
 		test.log(Status.FAIL,failuremessage);
 		//take screenshot and embed it in the reports
 		//fail in testng
+		takeScreenshoot();
 		if(proceedonFail.equalsIgnoreCase("Y")){// use softassertion
+			test.log(Status.INFO,"inside report failure if case");
 		softAssert.fail(failuremessage);
 		}
 		else{
+			test.log(Status.INFO,"inside report failure else case");
 			softAssert.fail(failuremessage);
 			softAssert.assertAll();
 		}
 			
+	}
+	
+	public void takeScreenshoot(){
+	//screenshot file name and path 
+		// fileName of the screenshot
+				Date d=new Date();
+				String screenshotFile=d.toString().replace(":", "_").replace(" ", "_")+".png";
+				// take screenshot
+				File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+				try {
+					// get the dynamic folder name
+					FileUtils.copyFile(srcFile, new File(ExtentManager.screenshotFolderPath+screenshotFile));
+					//put screenshot file in reports
+					test.log(Status.INFO,"Screenshot-> "+ test.addScreenCaptureFromPath(ExtentManager.screenshotFolderPath+screenshotFile));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 	
 	public void assertall(){

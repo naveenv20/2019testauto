@@ -53,7 +53,7 @@ String keyword=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.KEYWORD_COL, 
 String objectkey=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.OBJECT_COL , rNum);
 String datakey=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.DATA_COL, rNum);
 String datavalue=data.get(datakey);
-String ProceedonFail=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.PROCEED_COL,rNum);;
+String ProceedonFail=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.PROCEED_COL,rNum);
 //System.out.println(tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
 /******* if we need log into extent reports then use the test object***************/
 //test.log(Status.INFO, tcid+"--"+keyword+"--"+objectkey+"--"+datakey+"--"+datavalue+"--");
