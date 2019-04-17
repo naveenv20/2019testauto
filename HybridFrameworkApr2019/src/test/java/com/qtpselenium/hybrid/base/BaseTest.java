@@ -28,12 +28,13 @@ public class BaseTest {
 	
 	@BeforeTest
 	public void init(){
-		System.out.println("******"+ this.getClass().getSimpleName());
+		System.out.println("****** class name: "+ this.getClass().getSimpleName());
 		testName=this.getClass().getSimpleName();
 		
 		//System.out.println("******"+this.getClass().getPackage().getName());
 		String arr[]=this.getClass().getPackage().getName().split("\\.");
 		String suiteName=(arr[arr.length-1]);
+		System.out.println("****** suite name: "+ suiteName);
 		prop= new Properties();
 		envProp=new Properties();
 		System.out.println("Initialization in init method before test method of base test");

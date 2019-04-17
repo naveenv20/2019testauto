@@ -120,7 +120,7 @@ public class GenericKeywords {
 		//System.out.println("click"+ prop.getProperty(objectkey));
 		test.log(Status.INFO,"click "+ prop.getProperty(objectkey));
 		getelement(objectkey).click();
-		test.log(Status.INFO,"after click ");
+		//test.log(Status.INFO,"after click ");
 	}
 	
 	
@@ -145,10 +145,17 @@ public class GenericKeywords {
 	
 	public void select(){
 		test.log(Status.INFO, "selecting a value from dropdown");
-		Select element= new Select(getelement(objectkey));
+		//Select element= new Select(getelement(objectkey));
 		String new_xpath=prop.getProperty("ms_select_value1_xpath")+data.get(datakey)+prop.getProperty("ms_select_value2_xpath");
+		getelement(objectkey).click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		test.log(Status.INFO, "selecting xpath value is : "+new_xpath);
-		getelement(new_xpath).click();
+		getelementbyxpath(new_xpath).click();
 	}
 	
 	//centralised function to extract the web element
@@ -178,6 +185,18 @@ public class GenericKeywords {
 				return e;
 	}
 	
+	
+	public WebElement getelementbyxpath(String xpath){
+		WebElement e=null;
+		try {
+			e=driver.findElement(By.xpath(xpath));
+			
+		}catch (Exception exe) {
+			//failure
+			reportFailure("Object Not found from xpath function: "+ objectkey);
+		}
+		return e;
+	}
 	
 	public boolean isElementPresent(String objectkey ){
 		List<WebElement> abc=null;

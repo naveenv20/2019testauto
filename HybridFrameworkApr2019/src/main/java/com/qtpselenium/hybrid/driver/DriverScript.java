@@ -1,5 +1,8 @@
 package com.qtpselenium.hybrid.driver;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Properties;
@@ -34,7 +37,7 @@ public ExtentTest getTest() {
 
 
 
-public void executeKeywords (String testName, Xls_Reader xls, Hashtable<String, String> data) throws Exception {
+public void executeKeywords (String testName, Xls_Reader xls, Hashtable<String, String> data) {
 	int rows=xls.getRowCount(Constants.KEYWORDS_SHEET);
 System.out.println("num of rows "+ rows);
 
@@ -67,8 +70,37 @@ app.setProceedonFail(ProceedonFail);
 //Use Reflections api method to invoke the methods
 Method method;
 
-	method=app.getClass().getMethod(keyword);
-	method.invoke(app);
+
+		try {
+			method=app.getClass().getMethod(keyword);
+			method.invoke(app);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			test.log(Status.INFO, "Issue in invoking method : " + keyword +" at row number : "+rNum);
+			app.reportFailure( "Issue in invoking method : " + keyword +" at row number : "+rNum);
+		} catch(Exception e){
+			test.log(Status.INFO, "Other than method type : Issue in invoking method : " + keyword +" at row number : "+rNum);
+			app.assertall();
+		}
+	
+		
+	
+	
+	
+	
+//	catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		test.log(Status.ERROR, "Issue in invoking method : " + keyword +"at row number : "+rNum);
+////		String ee=e.getStackTrace().toString();		
+////		test.log(Status.ERROR, ee);
+////		StringWriter sw = new StringWriter();
+////		PrintWriter pw = new PrintWriter(sw);
+////		e.printStackTrace(pw);
+////		test.log(Status.FAIL, sw.toString());
+////			
+//		app.reportFailure( "Issue in invoking method : " + keyword +"at row number : "+rNum);
+//	} 
+	
 
 
 /*
