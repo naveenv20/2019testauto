@@ -219,6 +219,12 @@ public class GenericKeywords {
 		test.log(Status.INFO,"Inside the validate title function");	
 	}
 	
+	
+	public String gettext() {
+		String actualval=getelement(objectkey).getText();
+		return actualval;
+	}
+	
 	/************reporting function *****************/
 	public void reportFailure(String failuremessage){
 		//fail the test case
