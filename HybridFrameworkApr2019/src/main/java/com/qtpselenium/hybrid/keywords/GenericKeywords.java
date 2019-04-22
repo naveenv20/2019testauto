@@ -234,7 +234,12 @@ public class GenericKeywords {
 		}
 		WebDriverWait wait= new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(prop.getProperty("hourglass_icon_xpath")))));
-		
+
+	}
+	public String gettext() {
+		String actualval=getelement(objectkey).getText();
+		return actualval;
+
 	}
 	
 	/************reporting function *****************/
