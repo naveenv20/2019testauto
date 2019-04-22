@@ -179,6 +179,7 @@ public class GenericKeywords {
 		wait.until(ExpectedConditions.elementToBeClickable(e));
 		}
 		catch (Exception exe) {
+			exe.printStackTrace();
 			//failure
 			reportFailure("Object Not found : "+ objectkey);
 		}
@@ -217,6 +218,23 @@ public class GenericKeywords {
 	
 	public void validateTitle(){
 		test.log(Status.INFO,"Inside the validate title function");	
+	}
+	
+	public void dynamicwaitgap(){
+		test.log(Status.INFO,"inside dyanmicwait function");	
+	
+		WebDriverWait w2=new WebDriverWait(driver, 30);
+		w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath((prop.getProperty("hourglass_icon_xpath")))));
+		WebElement f=driver.findElement(By.xpath(prop.getProperty("hourglass_icon_xpath")));
+		if(!isElementPresent("hourglass_icon_xpath")){
+			reportFailure("Object Not found :::"+ "hourglass_icon_xpath");
+		}
+		else{
+			test.log(Status.INFO,"object found "+ "hourglass_icon_xpath");	
+		}
+		WebDriverWait wait= new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(prop.getProperty("hourglass_icon_xpath")))));
+		
 	}
 	
 	/************reporting function *****************/
