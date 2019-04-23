@@ -79,6 +79,7 @@ Method method;
 			test.log(Status.INFO, "Issue in invoking method : " + keyword +" at row number : "+rNum);
 			app.reportFailure( "Issue in invoking method : " + keyword +" at row number : "+rNum);
 		} catch(Exception e){
+			e.printStackTrace();
 			test.log(Status.INFO, "Other than method type : Issue in invoking method : " + keyword +" at row number : "+rNum);
 			app.assertall();
 		}
