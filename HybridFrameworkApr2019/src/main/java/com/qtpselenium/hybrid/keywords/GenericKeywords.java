@@ -15,6 +15,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -101,11 +103,28 @@ public class GenericKeywords {
 			//browser related log stopping them in console of eclipse --do this 
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
 			//invoke profile 
+			System.setProperty("webdriver.gecko.driver", "C:\\Seli\\browsers\\geckodriver.exe");
 			driver=new FirefoxDriver();
 		}
 		else if (browser.equals("Chrome")){
+			ChromeOptions ops = new ChromeOptions();	
+			
+			 ops.addArguments("--disable-notifications");
+	         ops.addArguments("disable-infobars");
+	         ops.addArguments("--start-maximized");
+	         //ops.addArguments("--proxy-server=http://83.209.94.87:8123");
+	         //ops.addArguments("user-data-dir=C:\\Users\\lenovo\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\");// Dont give default folder
+	         
+	        // ops.setPageLoadStrategy(PageLoadStrategy.EAGER);
+	        // ops.setBinary("PATH TO EXE");
+
+			//System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, "D://chrome.log");
+			System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+			
+			
+			
 			System.setProperty("webdriver.chrome.driver", "C:\\Seli\\browsers\\chromedriver.exe");
-			driver=new ChromeDriver();
+			driver=new ChromeDriver(ops);
 		}
 		
 		//maximise the browser
