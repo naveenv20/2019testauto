@@ -1,0 +1,19 @@
+table - complete table
+
+tbody
+
+tr -  row
+td - cell
+
+//table[@class='dataTable'] - complete table
+//table[@class='dataTable']/tbody
+//table[@class='dataTable']/tbody/tr[3]/td[4] - 3row,4cell
+//table[@class='dataTable']/tbody/tr[3]/td- 5 cells of 3rd row
+//table[@class='dataTable']/tbody/tr - all rows
+//table[@class='dataTable']/tbody/tr/td[5] -  each cell in 5th col
+
+
+.dataTable>tbody>tr:nth-child(5)>td:nth-child(3) --- 5,3
+.dataTable>tbody>tr:nth-child(5)>td -> all cells of 5th row
+.dataTable>tbody>tr - all rows
+.dataTable>tbody>tr>td:nth-child(5) -  each cell in 5th col
