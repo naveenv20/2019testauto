@@ -13,7 +13,7 @@ public class Dragging {
 	public static void main(String[] args) {
 		
 	System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
-
+	System.setProperty("webdriver.gecko.driver", "C:\\Seli\\browsers\\geckodriver.exe");
 	WebDriver driver = new FirefoxDriver();
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.get("http://jqueryui.com/draggable/");
