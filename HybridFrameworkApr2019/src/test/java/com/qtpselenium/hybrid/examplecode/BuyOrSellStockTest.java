@@ -1,5 +1,7 @@
 package com.qtpselenium.hybrid.examplecode;
 
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,13 +23,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-public class AddDelStockTest_Module17 {
+public class BuyOrSellStockTest {
 	WebDriver driver;
 	
-	@Test(priority=1)
-	public void addStockTest() throws InterruptedException{
-	
+	@Test
+	public void buyOrSellStockTest() throws InterruptedException{
 		String browser = "Mozilla";// xls, xml
 		// script
 		if(browser.equals("Mozilla")){
@@ -42,8 +42,8 @@ public class AddDelStockTest_Module17 {
 			driver = new EdgeDriver();
 		}
 		
-		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get("http://in.rediff.com/");
 		driver.findElement(By.xpath("//html/body/div[1]/div/div[2]/a[2]")).click();
@@ -57,47 +57,58 @@ public class AddDelStockTest_Module17 {
 		driver.findElement(By.id("userpass")).sendKeys("King12345");
 		driver.findElement(By.id("userpass")).sendKeys(Keys.ENTER);
 		Thread.sleep(5000);
-		//driver.switchTo().alert().accept();
-        waitForPageToLoad();
-        WebElement e = driver.findElement(By.id("portfolioid"));
-		Select s = new Select(e);
+		
+		waitForPageToLoad();
+		// additional delay
+		//Thread.sleep(10000);
+	    WebElement e = driver.findElement(By.id("portfolioid"));
+	    Select s = new Select(e);
 		s.selectByVisibleText("Ashi_29");
-		//
 		waitForPageToLoad();
-		driver.findElement(By.id("addStock")).click();
-		driver.findElement(By.id("addstockname")).sendKeys("Tata Steel Ltd");
-		driver.findElement(By.xpath("//div[text()='Tata Steel Ltd.']")).click();
-		
-		driver.findElement(By.id("stockPurchaseDate")).click();
-		selectDate("12/04/2017");
-		driver.findElement(By.id("addstockqty")).sendKeys("100");
-		driver.findElement(By.id("addstockprice")).sendKeys("500");
-		driver.findElement(By.id("addStockButton")).click();
-		waitForPageToLoad();
-		//String text = driver.findElement(By.xpath("//table[@id='stock']/tbody/tr[1]/td[2]")).getText();
-		//System.out.println(text);
 		int rNum=getRowWithCellData("Tata Steel");
-		System.out.println("Row " + rNum);
-		if(rNum==-1)
-			Assert.fail("Could not find the Stock");
-		
-		
+		System.out.println("Row "+ rNum);
+		driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
+	driver.findElement(By.xpath("//table[@id='stock']/tbody/tr[1]/td[3]/div/input[1]")).click();
+		driver.findElement(By.id("buySellCalendar")).click();
+		selectDate("11/02/2018");
+		driver.findElement(By.name("buysellqty")).sendKeys("200");
+		driver.findElement(By.name("buysellprice")).sendKeys("500");
+		driver.findElement(By.id("buySellStockButton")).click();
+		waitForPageToLoad();
+		// verify if new stock quantity is updated
+
 	}
 	
+	@Test
+	public void checkTransactionHistoryTest(){
+		
+		
+		int rNum=getRowWithCellData("Tata Steel");
+		driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
+		
+		String actual=driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[5]")).getText();
+		List<WebElement> shares = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[3]"));
+		List<WebElement> prices = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[4]"));
+		
+		int totalShares=0;
+		int totalAmount=0;
+		for(int i=0;i<prices.size();i++){
+			int share = Integer.parseInt(shares.get(i).getText());
+			int price = Integer.parseInt(prices.get(i).getText());
+			totalShares = share + totalShares;
+			totalAmount=totalAmount + (share*price);
+		}
+		System.out.println("Total shares - "+totalShares );
+		System.out.println("Total Amount spent "+totalAmount );
+		double average = Double.valueOf(totalAmount)/Double.valueOf(totalShares);
+		System.out.println("Average - "+average );
+		Assert.assertEquals(actual, average);
+		// fix the decimals - Math
+		
+	}	
 	
-	@Test(priority=2,dependsOnMethods={"addStockTest"})
-	public void deleteStockTest(){
-			int rNum=getRowWithCellData("Tata Steel Ltd.");
-			driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
-			driver.findElements(By.xpath("//input[@name='Delete']")).get(rNum-1).click();
-			driver.switchTo().alert().accept();
-			waitForPageToLoad();
-			driver.switchTo().defaultContent();
-			rNum=getRowWithCellData("Tata Steel Ltd.");
-			System.out.println(rNum);
-			Assert.assertEquals(rNum, -1);
-	}
 	
+
 	public void wait(int time){
 		try {
 			Thread.sleep(time*1000);
