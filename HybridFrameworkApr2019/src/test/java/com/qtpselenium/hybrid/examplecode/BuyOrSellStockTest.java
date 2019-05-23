@@ -56,19 +56,20 @@ public class BuyOrSellStockTest {
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("userpass"))));
 		driver.findElement(By.id("userpass")).sendKeys("King12345");
 		driver.findElement(By.id("userpass")).sendKeys(Keys.ENTER);
+		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("userpass"))));
 		Thread.sleep(5000);
-		
-		waitForPageToLoad();
+		//driver.switchTo().alert().accept();
 		// additional delay
 		//Thread.sleep(10000);
 	    WebElement e = driver.findElement(By.id("portfolioid"));
 	    Select s = new Select(e);
 		s.selectByVisibleText("Ashi_29");
 		waitForPageToLoad();
+		//Thread.sleep(10000);
 		int rNum=getRowWithCellData("Tata Steel");
 		System.out.println("Row "+ rNum);
 		driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
-	driver.findElement(By.xpath("//table[@id='stock']/tbody/tr[1]/td[3]/div/input[1]")).click();
+		driver.findElements(By.xpath("//input[@class='buySell']")).get(rNum-1).click();
 		driver.findElement(By.id("buySellCalendar")).click();
 		selectDate("11/02/2018");
 		driver.findElement(By.name("buysellqty")).sendKeys("200");
@@ -85,7 +86,7 @@ public class BuyOrSellStockTest {
 		
 		int rNum=getRowWithCellData("Tata Steel");
 		driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
-		
+		driver.findElements(By.xpath("//input[@class='equityTransaction']")).get(rNum-1).click();
 		String actual=driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[5]")).getText();
 		List<WebElement> shares = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[3]"));
 		List<WebElement> prices = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[4]"));
