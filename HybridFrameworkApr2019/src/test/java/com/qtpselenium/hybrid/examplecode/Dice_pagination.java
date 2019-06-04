@@ -27,17 +27,17 @@ public class Dice_pagination {
 		driver.findElement(By.name("q")).sendKeys("Selenium");
 		Thread.sleep(3000);
 		selectValue(tool);
-		driver.findElement(By.id("location")).clear();
-		driver.findElement(By.id("location")).sendKeys("New York");
+		driver.findElement(By.id("search-field-location")).clear();
+		driver.findElement(By.id("search-field-location")).sendKeys("New York");
 		Thread.sleep(3000);
 		selectValue(location);
-		driver.findElement(By.xpath("//input[@value='Find Tech Jobs']")).click();
+		driver.findElement(By.xpath("//button[@id='findTechJobs']")).click();
 		waitForPageToLoad();
 		int i=1;
 		while(i<=5){
 		System.out.println("*************Page Number "+ i);	
 		
-			List<WebElement> jobLinks = driver.findElements(By.xpath("//span[@itemprop='title']"));
+			List<WebElement> jobLinks = driver.findElements(By.xpath("//a[contains(@id,'position')]"));
 			for(WebElement e:jobLinks){
 				if(!e.getText().trim().equals(""))
 					System.out.println(e.getText());
