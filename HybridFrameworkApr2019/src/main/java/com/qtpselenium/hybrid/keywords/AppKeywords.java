@@ -23,14 +23,26 @@ public class AppKeywords extends GenericKeywords{
 	}
 	
 	public void redmoney_login_succ() {
-		String Expectedheader=data.get(datakey);
-		String actualheader=gettext();
-		if(Expectedheader.equals(actualheader)) {
-			test.log(Status.PASS, "Login success and header match");
-		}
-			else {
-			reportFailure("Login is a faiure ,Expected is :"+Expectedheader +" and actual is : "+actualheader);
-			
-		}
+//		String Expectedheader=data.get(datakey);
+//		String actualheader=gettext();
+//		if(Expectedheader.equals(actualheader)) {
+//			test.log(Status.PASS, "Login success and header match");
+//		}
+//			else {
+//			reportFailure("Login is a faiure ,Expected is :"+Expectedheader +" and actual is : "+actualheader);
+//			
+//		}
+
+       if(isElementPresent(objectkey)){
+    	   test.log(Status.PASS, "Able to see the my portfolio section");
+       }
+       else{
+    	   reportFailure("Login failure");
+       }
+	
+	
 	}
+		
+		
+		
 }

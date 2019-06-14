@@ -30,7 +30,7 @@ public class BaseTest {
 	public void init(){
 		System.out.println("****** class name: "+ this.getClass().getSimpleName());
 		testName=this.getClass().getSimpleName();
-		
+		System.out.println("****** testName: "+ testName);
 		//System.out.println("******"+this.getClass().getPackage().getName());
 		String arr[]=this.getClass().getPackage().getName().split("\\.");
 		String suiteName=(arr[arr.length-1]);
@@ -46,7 +46,7 @@ public class BaseTest {
 			
 			FileInputStream fp= new FileInputStream(System.getProperty("user.dir")+"//src//test//resources//"+envvalue+".properties");
 			envProp.load(fp);
-			System.out.println("#####"+envProp.getProperty("gap_url"));
+//			System.out.println("#####"+envProp.getProperty("gap_url"));
 			
 		} 
 		catch (Exception e) {
