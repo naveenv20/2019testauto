@@ -1,5 +1,9 @@
 package com.qtpselenium.hybrid.keywords;
 
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.aventstack.extentreports.Status;
 
 public class AppKeywords extends GenericKeywords{
@@ -19,7 +23,22 @@ public class AppKeywords extends GenericKeywords{
 	}
 	
 	public void defaultlogin() {
+		String username="";
+		String password="";
+		username=data.get("Username");
+		password=data.get("Password");
 		test.log(Status.INFO,"Inside the default login function");	
+		getelement("money_lnk_xpath").click();
+		getelement("signin_lnk_xpath").click();
+		getelement("login_tb_xpath").sendKeys(username);
+		getelement("login_ctn_btn_xpath").click();
+		WebDriverWait wait=new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(getelement("pwd_tb_xpath")));
+		getelement("pwd_tb_xpath").sendKeys(password);
+		getelement("pwd_cn_btn_xpath").click();
+		wait.until(ExpectedConditions.invisibilityOf(getelement("pwd_tb_xpath")));
+		
+		
 	}
 	
 	public void redmoney_login_succ() {

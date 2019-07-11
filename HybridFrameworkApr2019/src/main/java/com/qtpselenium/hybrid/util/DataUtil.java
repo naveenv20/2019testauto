@@ -8,8 +8,8 @@ public class DataUtil {
 		
 		// find the row Number of the testcase
 				int testStartRowNum=1;
-				System.out.println(xls.getCellData(Constants.DATA_SHEET, 0, testStartRowNum));
-				while(!xls.getCellData(Constants.DATA_SHEET, 0, testStartRowNum).equals(testName)){
+				//System.out.println(xls.getCellData(Constants.DATA_SHEET, 0, testStartRowNum));
+				while(!xls.getCellData(Constants.DATA_SHEET, 0, testStartRowNum).equalsIgnoreCase(testName)){
 					testStartRowNum++;
 				}
 				System.out.println("Row Number of test is "+testStartRowNum );
@@ -61,7 +61,7 @@ public class DataUtil {
 		int rows=xls.getRowCount(Constants.TESTCASES_SHEET);
 		for(int rNum=2;rNum<=rows;rNum++) {
 			String tcid=xls.getCellData(Constants.TESTCASES_SHEET,Constants.TCID_COL,rNum);
-			if(tcid.equals(testcasename)) {//test is found
+			if(tcid.equalsIgnoreCase(testcasename)) {//test is found
 				String runmode=xls.getCellData(Constants.TESTCASES_SHEET,Constants.RUNMODE_COL,rNum);
 				if(runmode.equalsIgnoreCase(Constants.RUNMODE_NO)) {
 					return true;

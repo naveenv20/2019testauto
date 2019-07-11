@@ -1,6 +1,7 @@
 package com.qtpselenium.hybrid.base;
 
 import java.io.FileInputStream;
+import java.lang.reflect.Method;
 import java.util.Properties;
 
 import org.testng.annotations.AfterMethod;
@@ -29,8 +30,16 @@ public class BaseTest {
 	@BeforeTest
 	public void init(){
 		System.out.println("****** class name: "+ this.getClass().getSimpleName());
+		/* Getting the name of test case , we make sure the test name and the class name are same */
+		/******** if we have multiple test in a single then pass the test name as method name , 
+		 * that is we have test1 and test 2 are there and test2 is dependent on test 1, 
+		 * so the way we the test name for getting the data from excel that logic is moved to data provider 
+		 * check there
+		 * and if you have just one test for each file then below one is good 
+		 
 		testName=this.getClass().getSimpleName();
 		System.out.println("****** testName: "+ testName);
+		*/
 		//System.out.println("******"+this.getClass().getPackage().getName());
 		String arr[]=this.getClass().getPackage().getName().split("\\.");
 		String suiteName=(arr[arr.length-1]);
@@ -86,8 +95,9 @@ public class BaseTest {
 	}
 	
 	@DataProvider
-	public Object[][] getData(){
-		System.out.println("Inside data provider");
+	public Object[][] getData(Method method){
+		System.out.println("Inside data provider: "+method.getName());
+		testName=method.getName();
 		return DataUtil.getTestData(testName, xls);
 	}
 	

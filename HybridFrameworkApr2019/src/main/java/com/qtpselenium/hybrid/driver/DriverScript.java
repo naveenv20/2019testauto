@@ -51,7 +51,7 @@ app.setData(data);
 app.setTest(test);
 for(int rNum=2;rNum<=rows;rNum++) {
 String tcid=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.TCID_COL, rNum);
-if(tcid.equals(testName)) {
+if(tcid.equalsIgnoreCase(testName)) {
 String keyword=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.KEYWORD_COL, rNum);
 String objectkey=xls.getCellData(Constants.KEYWORDS_SHEET,Constants.OBJECT_COL , rNum);
 String datakey=xls.getCellData(Constants.KEYWORDS_SHEET, Constants.DATA_COL, rNum);

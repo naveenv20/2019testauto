@@ -23,7 +23,7 @@ public class ExtentManager {
     		new File(reportPath+"screenshots").mkdirs();
     		//reportPath=System.getProperty("user.dir")+"//"+reportPath+"//"+folderName+"//";
     		screenshotFolderPath=reportPath+"screenshots//";
-    		System.out.println(reportPath+fileName);
+    		System.out.println("Report is at: "+reportPath+fileName);
     		createInstance(reportPath+fileName);
     	}
     	
