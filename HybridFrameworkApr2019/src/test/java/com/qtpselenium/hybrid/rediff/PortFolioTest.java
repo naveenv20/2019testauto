@@ -62,11 +62,10 @@ create_PF_btn_id=createPortfolioButton
 	
 	
 	@Test(priority=2)
-<<<<<<< HEAD
+
 	public void deletePortfolioTest() throws InterruptedException{
-=======
-	public void deletePortfolioTest(Hashtable<String, String> data) throws InterruptedException{
->>>>>>> branch 'master' of git@github.com:naveenv20/2019testauto.git
+
+	
 		System.out.println("Inside test 2");
 	}
 }
