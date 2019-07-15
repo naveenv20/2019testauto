@@ -261,6 +261,12 @@ public class GenericKeywords {
 		
 	}
 	
+	public void clear() {
+		test.log(Status.INFO, "clearing the :"+objectkey );
+	 getelement(objectkey).clear();
+		
+	}
+	
 	/************reporting function *****************/
 	public void reportFailure(String failuremessage){
 		//fail the test case

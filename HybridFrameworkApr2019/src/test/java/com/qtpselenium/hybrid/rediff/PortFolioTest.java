@@ -44,8 +44,8 @@ public class PortFolioTest extends BaseTest {
 }
 	
 	
-	@Test(priority=2,dataProvider="getData")
-	public void deletePortfolioTest(Hashtable<String, String> data) throws InterruptedException{
+	@Test(priority=2)
+	public void deletePortfolioTest() throws InterruptedException{
 		System.out.println("Inside test 2");
 	}
 }
