@@ -41,11 +41,32 @@ public class PortFolioTest extends BaseTest {
 		System.out.println("Running Login test GAP ");	
 		
 		ds.executeKeywords(testName, xls, data);
+		
+		/*
+		 *  createPortfolioTest		redmoney_login_succ	my_portfolio_header_xpath	login_succ_header	Y
+createPortfolioTest		click	create_PF_id		N
+createPortfolioTest		clear	PF_name_id		N
+createPortfolioTest		type	PF_name_id	PF_Name	N
+		click	create_PF_btn_id		N
+
+		 * 
+		 * 
+		 * 
+		 * my_portfolio_header_xpath=//*[@id="portfolioid"]
+create_PF_id=createPortfolio
+PF_name_id=create
+create_PF_btn_id=createPortfolioButton
+		 * 
+		 */
 }
 	
 	
 	@Test(priority=2)
+<<<<<<< HEAD
 	public void deletePortfolioTest() throws InterruptedException{
+=======
+	public void deletePortfolioTest(Hashtable<String, String> data) throws InterruptedException{
+>>>>>>> branch 'master' of git@github.com:naveenv20/2019testauto.git
 		System.out.println("Inside test 2");
 	}
 }

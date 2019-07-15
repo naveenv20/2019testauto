@@ -262,9 +262,14 @@ public class GenericKeywords {
 	}
 	
 	public void clear() {
+<<<<<<< HEAD
 		test.log(Status.INFO, "clearing the :"+objectkey );
 	 getelement(objectkey).clear();
 		
+=======
+		test.log(Status.INFO,"clearing the feild "+ objectkey);
+		getelement(objectkey).clear();
+>>>>>>> branch 'master' of git@github.com:naveenv20/2019testauto.git
 	}
 	
 	/************reporting function *****************/
