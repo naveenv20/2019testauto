@@ -14,6 +14,11 @@ import java.net.URL;
 import java.util.Set;
 public class FileDownloader {
 
+	/*
+	 * For this file alone , we are using common io jat which was under the jars folder of this project 
+	 * httpclient jar also . they are not coming from maven please check 
+	 * 
+	 */
     private WebDriver driver;
    // private String localDownloadPath = System.getProperty("java.io.tmpdir");
     private boolean followRedirects = true;
