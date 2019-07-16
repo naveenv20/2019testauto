@@ -2,6 +2,7 @@ package com.qtpselenium.hybrid.keywords;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.Status;
@@ -62,6 +63,15 @@ public class AppKeywords extends GenericKeywords{
 	
 	}
 		
-		
+		public void verifyportfolio() {
+			
+			test.log(Status.INFO, "Checking if the portfolio is created or not "+data.get(datakey));
+			waitforinvisibilityofelement("create_PF_BTN_id");
+			Select s= new Select(getelement(objectkey));
+			String text=s.getFirstSelectedOption().getText();	
+			test.log(Status.INFO, "go the value as :"+text);
+			if(!text.equalsIgnoreCase(data.get(datakey)))
+				reportFailure("value in DP did not matched");	
+		}
 		
 }

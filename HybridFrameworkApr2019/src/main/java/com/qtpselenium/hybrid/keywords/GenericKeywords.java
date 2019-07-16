@@ -272,6 +272,12 @@ public class GenericKeywords {
 
 	}
 	
+	public void waitforinvisibilityofelement(String objectkey) {
+		WebDriverWait wait=new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOf(getelement(objectkey)));
+		
+	}
+	
 	/************reporting function *****************/
 	public void reportFailure(String failuremessage){
 		//fail the test case
