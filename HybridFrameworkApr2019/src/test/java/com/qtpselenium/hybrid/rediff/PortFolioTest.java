@@ -64,8 +64,6 @@ create_PF_btn_id=createPortfolioButton
 	@Test(priority=2)
 
 	public void deletePortfolioTest() throws InterruptedException{
-
-	
 		System.out.println("Inside test 2");
 	}
 }

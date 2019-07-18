@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -261,11 +262,7 @@ public class GenericKeywords {
 		
 	}
 	
-	public void clear() {
-
-		test.log(Status.INFO, "clearing the :"+objectkey );
-	 getelement(objectkey).clear();
-		
+	public void clear() {	
 
 		test.log(Status.INFO,"clearing the feild "+ objectkey);
 		getelement(objectkey).clear();
@@ -275,6 +272,78 @@ public class GenericKeywords {
 	public void waitforinvisibilityofelement(String objectkey) {
 		WebDriverWait wait=new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOf(getelement(objectkey)));
+		
+	}
+	
+	
+	public void waitForPageToLoad(){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		int i=0;
+		
+		while(i!=10){
+		String state = (String)js.executeScript("return document.readyState;");
+		System.out.println(state);
+
+		if(state.equals("complete"))
+			break;
+		else
+			wait(2);
+
+		i++;
+		}
+		// check for jquery status
+		i=0;
+		while(i!=10){
+	
+			Long d= (Long) js.executeScript("return jQuery.active;");
+			System.out.println(d);
+			if(d.longValue() == 0 )
+			 	break;
+			else
+				 wait(2);
+			 i++;
+				
+			}
+		
+		}
+	
+	
+	public void wait(int time){
+		try {
+			Thread.sleep(time*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void acceptAlertifpresent() {
+		test.log(Status.INFO, "swithing to alert");
+		try {
+			driver.switchTo().alert().accept();
+			driver.switchTo().defaultContent();
+			test.log(Status.INFO, "alert accepted");
+		}catch(Exception e) {
+			test.log(Status.INFO, "alert not present ");
+		}
+	}
+	
+	public void waitTillSelectionToBe(String objectkey,String expected) {
+		int i=0;
+		while(i!=10){
+			WebElement e = getelement(objectkey);
+			Select s = new Select(e);
+			String actual = s.getFirstSelectedOption().getText();
+			System.out.println(actual);
+			if(actual.equals(expected))
+				return;
+			else
+				wait(1);			
+				i++;	
+		}
+		// reach here
+		reportFailure("Value never changed in Select box");
+		
 		
 	}
 	
