@@ -356,6 +356,14 @@ public class GenericKeywords {
 	}
 	
 	
+	public void dropdownselect(){
+		test.log(Status.INFO, "selecting a value from drop down");
+		WebElement e = getelement(objectkey);
+		Select s = new Select(e);
+		s.selectByVisibleText(data.get(datakey));
+		test.log(Status.INFO, "selecting the  value from drop down as "+data.get(datakey));
+	}
+	
 	public void hoverandclick() {
 		test.log(Status.INFO, "hovering to element "+objectkey);
 		Actions act=new Actions(driver);
