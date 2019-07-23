@@ -66,7 +66,7 @@ public class AppKeywords extends GenericKeywords{
 		public void verifyportfolio() {
 			
 			test.log(Status.INFO, "Checking if the portfolio is created or not "+data.get(datakey));
-			waitforinvisibilityofelement("create_PF_BTN_id");
+			//waitforinvisibilityofelement("create_PF_BTN_id_xpath");
 			Select s= new Select(getelement(objectkey));
 			String text=s.getFirstSelectedOption().getText();	
 			test.log(Status.INFO, "go the value as :"+text);

@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -270,8 +271,15 @@ public class GenericKeywords {
 	}
 	
 	public void waitforinvisibilityofelement(String objectkey) {
+		test.log(Status.INFO, "waitforinvisibilityofelement  : "+objectkey);
+		
+		try {
 		WebDriverWait wait=new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOf(getelement(objectkey)));
+		}
+		catch(Exception e) {
+			test.log(Status.INFO, "waitforinvisibilityofelement : object not found or exception");
+		}
 		
 	}
 	
@@ -344,6 +352,17 @@ public class GenericKeywords {
 		// reach here
 		reportFailure("Value never changed in Select box");
 		
+		
+	}
+	
+	
+	public void hoverandclick() {
+		test.log(Status.INFO, "hovering to element "+objectkey);
+		Actions act=new Actions(driver);
+		act.moveToElement(getelement(objectkey)).build().perform();
+		//act.sendKeys(Keys.ENTER);
+		act.clickAndHold();
+		act.release();
 		
 	}
 	
