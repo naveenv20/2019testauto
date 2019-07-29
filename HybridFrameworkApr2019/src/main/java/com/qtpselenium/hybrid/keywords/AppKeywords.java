@@ -1,5 +1,9 @@
 package com.qtpselenium.hybrid.keywords;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -72,6 +76,22 @@ public class AppKeywords extends GenericKeywords{
 			test.log(Status.INFO, "go the value as :"+text);
 			if(!text.equalsIgnoreCase(data.get(datakey)))
 				reportFailure("value in DP did not matched");	
+		}
+		
+		
+		public int getRowWithCellData(String data){
+			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='stock']/tbody/tr"));
+			for(int rNum=0;rNum<rows.size();rNum++){
+				WebElement row = rows.get(rNum);
+				List<WebElement> cells = row.findElements(By.tagName("td"));
+				for(int cNum=0;cNum<cells.size();cNum++){
+					WebElement cell = cells.get(cNum);
+					if(!cell.getText().trim().equals("") && data.contains(cell.getText()))
+						return ++rNum;
+				}
+			}
+			
+			return -1;// not found
 		}
 		
 }

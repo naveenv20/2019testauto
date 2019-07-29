@@ -2,6 +2,8 @@ package com.qtpselenium.hybrid.keywords;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -371,6 +373,44 @@ public class GenericKeywords {
 		//act.sendKeys(Keys.ENTER);
 		act.clickAndHold();
 		act.release();
+		
+	}
+	
+	/************Selecting the date**********************/
+	public void selectDateddMMyyyy(){
+		test.log(Status.INFO, "selecting the date : "+data.get(datakey));
+		// day, month , year
+		String d=data.get(datakey);
+		Date current = new Date();
+		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			Date selected = sd.parse(d);
+			String day = new SimpleDateFormat("dd").format(selected);
+			String month = new SimpleDateFormat("MMMM").format(selected);
+			String year = new SimpleDateFormat("yyyy").format(selected);
+			System.out.println(day+" --- "+month+" --- "+ year);
+			String desiredMonthYear=month+" "+year;
+			
+			while(true){
+				String displayedMonthYear=driver.findElement(By.cssSelector(".dpTitleText")).getText();
+				if(desiredMonthYear.equals(displayedMonthYear)){
+					// select the day
+					driver.findElement(By.xpath("//td[text()='"+day+"']")).click();
+					break;
+				}else{
+					
+					if(selected.compareTo(current) > 0)
+						driver.findElement(By.xpath("//*[@id='datepicker']/table/tbody/tr[1]/td[4]/button")).click();
+					else if(selected.compareTo(current) < 0)
+						driver.findElement(By.xpath("//*[@id='datepicker']/table/tbody/tr[1]/td[2]/button")).click();
+
+				}
+			}
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
