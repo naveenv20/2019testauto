@@ -94,4 +94,38 @@ public class AppKeywords extends GenericKeywords{
 			return -1;// not found
 		}
 		
+		
+		public void redmoney_addstk_succ(){
+			test.log(Status.INFO, "trying to check if the stock is available");
+			String stockname=data.get(datakey);
+			int rNum=getRowWithCellData(stockname);
+			System.out.println("Row " + rNum);
+			if(rNum==-1)
+				reportFailure("Stock not found");
+			else{
+				test.log(Status.INFO,"Stock found !!!!!!!");
+			}
+			
+		}
+		
+		public void deletestockontable(){
+			String stockname=data.get(datakey);
+			int rNum=getRowWithCellData(stockname);	
+			//String stk_radio_xpath=//table[@id='stock']/tbody/tr["+rNum+"]/td[1];
+			driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
+			//String stk_delete_xpath=//table[@id='stock']/tbody/tr["+rNum+"]/td[1];
+			driver.findElements(By.xpath("//input[@name='Delete']")).get(rNum-1).click();
+			driver.switchTo().alert().accept();
+			waitForPageToLoad();
+			driver.switchTo().defaultContent();
+			rNum=getRowWithCellData(stockname);
+			System.out.println(rNum);
+			if(rNum== -1){
+				test.log(Status.PASS, "Deleted the stock successfully");
+			}
+				else{
+					reportFailure("Problem with stock deletion ");
+				}
+			
+		}
 }

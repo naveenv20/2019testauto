@@ -35,7 +35,7 @@ public class AddDelStockTest_Module17 extends BaseTest{
 	@Test(priority=1,dataProvider="getData")
 	public void addStockTest(Hashtable<String, String> data) throws InterruptedException{
 	
-		test.log(Status.INFO, "starting createPortfolioTest");
+		test.log(Status.INFO, "starting addstocktest");
 
 		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO)){
 			test.log(Status.SKIP, "Test Case configured as No: "+ testName);
@@ -56,20 +56,18 @@ public class AddDelStockTest_Module17 extends BaseTest{
 		
 	}
 	
-	/*
-	@Test(priority=2,dependsOnMethods={"addStockTest"})
-	public void deleteStockTest(){
-			int rNum=getRowWithCellData("Tata Steel Ltd.");
-			driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
-			driver.findElements(By.xpath("//input[@name='Delete']")).get(rNum-1).click();
-			driver.switchTo().alert().accept();
-			waitForPageToLoad();
-			driver.switchTo().defaultContent();
-			rNum=getRowWithCellData("Tata Steel Ltd.");
-			System.out.println(rNum);
-			Assert.assertEquals(rNum, -1);
+	
+	@Test(priority=2,dependsOnMethods={"addStockTest"},dataProvider="getData")
+	public void deleteStockTest(Hashtable<String, String> data){
+		test.log(Status.INFO, "starting deleteStockTest");
+
+		if(DataUtil.isSkip(testName, xls)||data.get(Constants.RUNMODE_COL).equals(Constants.RUNMODE_NO)){
+			test.log(Status.SKIP, "Test Case configured as No: "+ testName);
+			throw new SkipException("Run mode is No");
+		}
+		ds.executeKeywords(testName, xls, data);
 	}
-	*/
+	
 	
 	
 	
