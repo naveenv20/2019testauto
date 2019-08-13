@@ -112,7 +112,8 @@ public class AppKeywords extends GenericKeywords{
 			String stockname=data.get(datakey);
 			int rNum=getRowWithCellData(stockname);	
 			//String stk_radio_xpath=//table[@id='stock']/tbody/tr["+rNum+"]/td[1];
-			driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
+			//driver.findElement(By.xpath("//table[@id='stock']/tbody/tr["+rNum+"]/td[1]")).click();
+			click("stock_row_xpath");
 			//String stk_delete_xpath=//table[@id='stock']/tbody/tr["+rNum+"]/td[1];
 			driver.findElements(By.xpath("//input[@name='Delete']")).get(rNum-1).click();
 			driver.switchTo().alert().accept();

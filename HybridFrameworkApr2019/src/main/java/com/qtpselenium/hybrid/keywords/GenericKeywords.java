@@ -146,6 +146,12 @@ public class GenericKeywords {
 		//test.log(Status.INFO,"after click ");
 	}
 	
+	// not a regular of clicking , the above click can be driven from data excel file , this is one from inside code if we have to then use this way
+	public void click(String objectkey){
+		setObjectkey(objectkey);
+		click();
+	}
+	
 	
 	public void type() {
 		//System.out.println("type on object: "+ prop.getProperty(objectkey)+"   and value is"+data.get(datakey));
