@@ -1,0 +1,9 @@
+<suite name="My suite" >
+ <suite-files>
+   <suite-file path="./src/test/resources/rediff.xml" />
+ 
+   
+   
+  </suite-files>
+
+</suite>

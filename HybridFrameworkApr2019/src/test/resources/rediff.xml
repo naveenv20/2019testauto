@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite A" >
+
+
+  <test name="Login Test">
+    <classes>
+        <class name="com.qtpselenium.hybrid.rediff.RediffLogin" ></class>  
+        
+    </classes>
+ </test>
+ 
+   <test name="Portfolio Test">
+    <classes>
+        <class name="com.qtpselenium.hybrid.rediff.PortFolioTest" ></class>  
+    </classes>
+ </test>
+ 
+   <test name="AddDelStock">
+    <classes>
+        <class name="com.qtpselenium.hybrid.rediff.AddDelStockTest_Module17" ></class>  
+    </classes>
+ </test>
+
+
+</suite>

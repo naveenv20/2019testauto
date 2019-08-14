@@ -69,12 +69,4 @@ public class AddDelStockTest_Module17 extends BaseTest{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-
-	
 }
