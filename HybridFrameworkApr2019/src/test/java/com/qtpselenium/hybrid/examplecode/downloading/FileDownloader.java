@@ -1,6 +1,6 @@
 package com.qtpselenium.hybrid.examplecode.downloading;
 
-
+/*
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Set;
+*/
 public class FileDownloader {
 
 	/*
@@ -19,6 +20,8 @@ public class FileDownloader {
 	 * httpclient jar also . they are not coming from maven please check 
 	 * 
 	 */
+
+/*
     private WebDriver driver;
    // private String localDownloadPath = System.getProperty("java.io.tmpdir");
     private boolean followRedirects = true;
@@ -29,33 +32,45 @@ public class FileDownloader {
         this.driver = driverObject;
         localDownloadPath=path;
     }
+    
+    */
 
     /**
      * Specify if the FileDownloader class should follow redirects when trying to download a file
      *
      * @param value
      */
+
+/*
     public void followRedirectsWhenDownloading(boolean value) {
         this.followRedirects = value;
     }
 
+*/
     /**
      * Get the current location that files will be downloaded to.
      *
      * @return The filepath that the file will be downloaded to.
      */
+
+/*
     public String localDownloadPath() {
         return this.localDownloadPath;
     }
 
+*/
     /**
      * Set the path that files will be downloaded to.
      *
      * @param filePath The filepath that the file will be downloaded to.
      */
+
+/*
     public void localDownloadPath(String filePath) {
         this.localDownloadPath = filePath;
     }
+    
+    */
 
     /**
      * Download the file specified in the href attribute of a WebElement
@@ -70,16 +85,14 @@ public class FileDownloader {
      *
      * @return
      */
+
+/*
     public int httpStatusOfLastDownloadAttempt() {
         return this.httpStatusOfLastDownloadAttempt;
     }
 
-    /**
-     * Load in all the cookies WebDriver currently knows about so that we can mimic the browser cookie state
-     *
-     * @param seleniumCookieSet
-     * @return
-     */
+   
+    
     private HttpState mimicCookieState(Set<org.openqa.selenium.Cookie> seleniumCookieSet) {
         HttpState mimicWebDriverCookieState = new HttpState();
         for (org.openqa.selenium.Cookie seleniumCookie : seleniumCookieSet) {
@@ -89,6 +102,8 @@ public class FileDownloader {
 
         return mimicWebDriverCookieState;
     }
+    
+    */
 
     /**
      * Set the host configuration based upon the URL of the file/image that will be downloaded
@@ -97,6 +112,8 @@ public class FileDownloader {
      * @param hostPort
      * @return
      */
+
+/*
     private HostConfiguration setHostDetails(String hostURL, int hostPort) {
         HostConfiguration hostConfig = new HostConfiguration();
         hostConfig.setHost(hostURL, hostPort);
@@ -104,6 +121,7 @@ public class FileDownloader {
         return hostConfig;
     }
 
+*/
     /**
      * Perform the file/image download.
      *
@@ -113,6 +131,8 @@ public class FileDownloader {
      * @throws IOException
      * @throws NullPointerException
      */
+
+/*
     public String downloader(String fileToDownloadLocation) throws IOException, NullPointerException {
         if (fileToDownloadLocation.trim().equals("")) throw new NullPointerException("The element you have specified does not link to anything!");
 
@@ -135,5 +155,5 @@ public class FileDownloader {
 
         return downloadedFileAbsolutePath;
     }
-
+*/
 }
