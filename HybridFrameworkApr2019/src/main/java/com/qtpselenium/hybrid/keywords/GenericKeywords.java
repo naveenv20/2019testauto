@@ -2,6 +2,8 @@ package com.qtpselenium.hybrid.keywords;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +26,8 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -100,9 +105,39 @@ public class GenericKeywords {
 	
 	/*************************Operation Functions*********************/
 	public void openBrowser() {
+		
+		
+		
 		String browser=data.get(datakey);
 		//System.out.println("open browser"+ data.get(datakey));
 		test.log(Status.INFO,"open browser "+ data.get(datakey));
+		
+		if(prop.getProperty("gridRun").equalsIgnoreCase("Y")){
+			//run on grid 
+			DesiredCapabilities cap=null;
+			if(browser.equals("Mozilla")){
+				cap=DesiredCapabilities.firefox();
+				cap.setJavascriptEnabled(true);
+				cap.setPlatform(Platform.WINDOWS);
+			}else if(browser.equals("Chrome")){
+				cap=DesiredCapabilities.chrome();
+				cap.setJavascriptEnabled(true);
+				cap.setPlatform(Platform.WINDOWS);
+			}
+			
+			try {
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+		}
+		else{
 		if(browser.equals("Mozilla")){
 			//browser related log stopping them in console of eclipse --do this 
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
@@ -136,7 +171,7 @@ public class GenericKeywords {
 		//set the implicit wait
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		
-		
+		}
 	}
 	
 	public void click() {
